@@ -1,0 +1,5 @@
+certificate.crt
+privatekey.key
+.env
+
+__pycache__/
