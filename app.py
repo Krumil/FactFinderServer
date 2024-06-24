@@ -10,9 +10,13 @@ from tools.vision import get_image_description
 import os
 
 load_dotenv()
-os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
+if not openai_api_key:
+    raise ValueError("OPENAI_API_KEY environment variable is not set")
 
+os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
+if not os.getenv("TAVILY_API_KEY"):
+    raise ValueError("TAVILY_API_KEY environment variable is not set")
 
 prompt = hub.pull("hwchase17/openai-tools-agent")
 search = TavilySearchAPIWrapper()
