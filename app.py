@@ -30,7 +30,7 @@ if not os.getenv("TAVILY_API_KEY"):
 logger.info("TAVILY_API_KEY is set")
 
 logger.info("Initializing LangChain components")
-prompt = hub.pull("hwchase17/openai-tools-agent")
+prompt = hub.pull("krumil/openai-tools-agent")
 search = TavilySearchAPIWrapper()
 tools = [TavilySearchResults(max_results=3, api_wrapper=search), get_image_description]
 
@@ -48,6 +48,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 logger.info("FastAPI app initialized with CORS middleware")
+
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the AI Fact Checker API"}
+
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
 
 
 @app.post("/stream")
@@ -82,8 +92,7 @@ async def stream(request: Request):
 
 if __name__ == "__main__":
     import uvicorn
-    import os
 
-    port = int(os.environ.get("PORT", 10000))
+    port = int(os.environ.get("PORT", 8000))
     logger.info(f"Starting server on port {port}")
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run("main:app", host="0.0.0.0", port=port, log_level="info")
