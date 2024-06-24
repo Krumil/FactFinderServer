@@ -1,0 +1,11 @@
+services:
+  - type: web
+    runtime: docker
+    name: fastapi-app
+    buildCommand: docker build -t fastapi-app .
+    startCommand: docker run -p 10000:10000 fastapi-app
+    envVars:
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
