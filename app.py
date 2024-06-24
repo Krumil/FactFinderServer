@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from langchain import hub
 from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain_community.tools.tavily_search import TavilySearchResults
-from langchain.utilities.tavily_search import TavilySearchAPIWrapper
+from langchain_community.utilities.tavily_search import TavilySearchAPIWrapper
 from langchain_openai import ChatOpenAI
 from fastapi.middleware.cors import CORSMiddleware
 from tools.vision import get_image_description
