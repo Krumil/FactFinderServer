@@ -29,6 +29,16 @@ if not os.getenv("TAVILY_API_KEY"):
     raise ValueError("TAVILY_API_KEY environment variable is not set")
 logger.info("TAVILY_API_KEY is set")
 
+logger.info("Initializing LangChain components")
+prompt = hub.pull("krumil/openai-tools-agent")
+search = TavilySearchAPIWrapper()
+tools = [
+    TavilySearchResults(max_results=3, api_wrapper=search),
+    get_image_description,
+]
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
+
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -72,15 +82,6 @@ async def stream(request: Request):
             logger.info(f"Image URL provided: {image_url}")
             input_text = f"Considering the image here: {image_url}. {input_text}"
 
-        logger.info("Initializing LangChain components")
-        prompt = hub.pull("krumil/openai-tools-agent")
-        search = TavilySearchAPIWrapper()
-        tools = [
-            TavilySearchResults(max_results=3, api_wrapper=search),
-            get_image_description,
-        ]
-
-        llm = ChatOpenAI(model="gpt-4o", temperature=0)
         agent = create_openai_tools_agent(llm, tools, prompt)
         agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
         logger.info("LangChain components initialized")
