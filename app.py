@@ -29,16 +29,6 @@ if not os.getenv("TAVILY_API_KEY"):
     raise ValueError("TAVILY_API_KEY environment variable is not set")
 logger.info("TAVILY_API_KEY is set")
 
-logger.info("Initializing LangChain components")
-prompt = hub.pull("krumil/openai-tools-agent")
-search = TavilySearchAPIWrapper()
-tools = [TavilySearchResults(max_results=3, api_wrapper=search), get_image_description]
-
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
-agent = create_openai_tools_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
-logger.info("LangChain components initialized")
-
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -64,6 +54,7 @@ async def health_check():
 async def stream(request: Request):
     logger.info("Received POST request to /stream")
     try:
+
         response = await request.json()
         input_text = response.get("input")
         image_url = response.get("image")
@@ -80,6 +71,19 @@ async def stream(request: Request):
         if image_url:
             logger.info(f"Image URL provided: {image_url}")
             input_text = f"Considering the image here: {image_url}. {input_text}"
+
+        logger.info("Initializing LangChain components")
+        prompt = hub.pull("krumil/openai-tools-agent")
+        search = TavilySearchAPIWrapper()
+        tools = [
+            TavilySearchResults(max_results=3, api_wrapper=search),
+            get_image_description,
+        ]
+
+        llm = ChatOpenAI(model="gpt-4o", temperature=0)
+        agent = create_openai_tools_agent(llm, tools, prompt)
+        agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+        logger.info("LangChain components initialized")
 
         logger.info(f"Invoking agent executor with input: {input_text}")
         response = agent_executor.invoke({"input": input_text})
