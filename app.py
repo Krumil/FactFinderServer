@@ -1,14 +1,24 @@
 from fastapi import FastAPI, Request
 from dotenv import load_dotenv
 from langchain import hub
-from langchain.agents import AgentExecutor, create_openai_tools_agent
+from langchain.agents import (
+    AgentExecutor,
+    create_openai_tools_agent,
+    create_tool_calling_agent,
+)
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_community.utilities.tavily_search import TavilySearchAPIWrapper
 from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
 from fastapi.middleware.cors import CORSMiddleware
+from utils import load_settings
 from tools.vision import get_image_description
 import os
 import logging
+
+settings = load_settings()
+llm_to_use = settings["llm"]
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -23,6 +33,12 @@ if not openai_api_key:
     raise ValueError("OPENAI_API_KEY environment variable is not set")
 logger.info("OPENAI_API_KEY is set")
 
+anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
+if not anthropic_api_key:
+    logger.error("ANTHROPIC_API_KEY environment variable is not set")
+    raise ValueError("ANTHROPIC_API_KEY environment variable is not set")
+logger.info("ANTHROPIC_API_KEY is set")
+
 os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
 if not os.getenv("TAVILY_API_KEY"):
     logger.error("TAVILY_API_KEY environment variable is not set")
@@ -36,7 +52,18 @@ tools = [
     TavilySearchResults(max_results=3, api_wrapper=search),
     get_image_description,
 ]
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+
+if llm_to_use == "openai":
+    llm = ChatOpenAI(model="gpt-4o", temperature=0)
+if llm_to_use == "anthropic":
+    llm = ChatAnthropic(
+        model="claude-3-5-sonnet-20240620",
+        temperature=0,
+        timeout=None,
+        max_retries=2,
+    )
+else:
+    raise ValueError("Invalid LLM specified")
 
 
 app = FastAPI()
@@ -82,7 +109,11 @@ async def stream(request: Request):
             logger.info(f"Image URL provided: {image_url}")
             input_text = f"Considering the image here: {image_url}. {input_text}"
 
-        agent = create_openai_tools_agent(llm, tools, prompt)
+        if llm_to_use == "openai":
+            agent = create_openai_tools_agent(llm, tools, prompt)
+        elif llm_to_use == "anthropic":
+            agent = create_tool_calling_agent(llm, tools, prompt)
+
         agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
         logger.info("LangChain components initialized")
 
