@@ -103,7 +103,7 @@ async def stream(request: Request):
         response = await request.json()
         input_text = response.get("input")
         image_url = response.get("image")
-        if not input_text:
+        if not input_text and not image_url:
             logger.warning("No input provided in the request")
             return {"error": "No input provided"}
 
