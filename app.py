@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from langchain import hub
 from langchain.agents import (
@@ -6,23 +7,28 @@ from langchain.agents import (
     create_openai_tools_agent,
     create_tool_calling_agent,
 )
+from langchain_anthropic import ChatAnthropic
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_community.utilities.tavily_search import TavilySearchAPIWrapper
 from langchain_openai import ChatOpenAI
-from langchain_anthropic import ChatAnthropic
-from fastapi.middleware.cors import CORSMiddleware
-from utils import load_settings
+from pydantic import BaseModel
+from tools.tweet_generator import generate_tweet
 from tools.vision import get_image_description
+from tools.fact_checker import check_fact, check_news
+from utils import load_settings
+from prompt import generate_fact_check_prompt
 import os
 import logging
+from datetime import datetime
 
 settings = load_settings()
 llm_to_use = settings["llm"]
 
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO) 
 logger = logging.getLogger(__name__)
+
 
 load_dotenv()
 logger.info("Environment variables loaded")
@@ -50,6 +56,8 @@ prompt = hub.pull("krumil/openai-tools-agent")
 search = TavilySearchAPIWrapper()
 tools = [
     TavilySearchResults(max_results=3, api_wrapper=search),
+    check_fact,
+    check_news,
     get_image_description,
 ]
 
@@ -99,11 +107,8 @@ async def stream(request: Request):
             logger.warning("No input provided in the request")
             return {"error": "No input provided"}
 
-        input_text = (
-            "Is this fact correct? "
-            + input_text
-            + ". If not please provide the correct fact and why it is correct together with the source."
-        )
+        today = datetime.today().strftime("%B %d, %Y")
+        input_text = generate_fact_check_prompt(input_text, today)
 
         if image_url:
             logger.info(f"Image URL provided: {image_url}")
@@ -120,15 +125,35 @@ async def stream(request: Request):
         logger.info(f"Invoking agent executor with input: {input_text}")
         response = agent_executor.invoke({"input": input_text})
         logger.info("Agent executor response received")
+        
+        if llm_to_use == "anthropic":
+            response = response["output"][0]["text"]
+        if llm_to_use == "openai":
+            response = response["output"]
+
         return response
     except Exception as e:
         logger.error(f"An error occurred: {str(e)}", exc_info=True)
         return {"error": str(e)}
 
 
+class FactCheckRequest(BaseModel):
+    factCheck: str
+    originalTweet: str
+
+@app.post("/generate_tweet")
+async def generate_tweet_endpoint(request: FactCheckRequest):
+    logger.info("Received POST request to /generate_tweet")
+    fact_check = request.factCheck
+    original_tweet = request.originalTweet
+    tweet = generate_tweet(fact_check, original_tweet)
+    return {"tweet": tweet}
+
+
+
 if __name__ == "__main__":
     import uvicorn
-
     port = int(os.environ.get("PORT", 8000))
     logger.info(f"Starting server on port {port}")
+    # uvicorn.run("app:app", host="localhost", port=port, log_level="debug", ssl_keyfile="privatekey.key", ssl_certfile="certificate.crt")
     uvicorn.run("main:app", host="0.0.0.0", port=port, log_level="info")
