@@ -12,7 +12,7 @@ This project implements an AI-powered Fact Checking Chrome Extension using vario
 
 ## Demo
 
-![AI Fact Checker Demo](FactChecker.gif)
+![AI Fact Checker Demo](./FactChecker.gif)
 
 This video demonstrates the key features of our AI Fact Checker Chrome Extension:
 
