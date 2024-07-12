@@ -11,7 +11,7 @@ Key Features:
 
 Functionality:
 1. Navigate the web normally.
-2. Activate the AI Fact Checker when encountering questionable information.
+2. When encountering questionable information, click on the icon with the shield under the post.
 3. Our advanced AI analyzes the content, cross-references with authoritative sources, and provides a comprehensive fact-check report.
 4. Easily disseminate findings using the integrated summary generator.
 
