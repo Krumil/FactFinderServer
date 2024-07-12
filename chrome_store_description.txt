@@ -1,0 +1,20 @@
+AI Fact Checker: Your Browser's Truth Detective
+
+Tired of falling for fake news? Meet AI Fact Checker, your personal truth-seeking sidekick for the web!
+
+Key Features:
+🔍 Instant Fact-Checking: Verify information on any webpage with just a click.
+🖼️ Image Analysis: Our AI can even describe and fact-check images!
+📊 Reliable Sources: Powered by Google Fact Check and GDELT APIs for accurate results.
+🐦 Tweet Generator: Automatically create shareable tweets about your fact-checks.
+🧠 Flexible AI: Choose between GPT-4 or Claude for your fact-checking needs.
+
+How It Works:
+1. Browse the web as usual.
+2. When you spot something suspicious, click the AI Fact Checker icon.
+3. Our AI analyzes the content, cross-references with trusted sources, and delivers a fact-check report.
+4. Share your findings easily with the built-in tweet generator.
+
+Join the fight against misinformation and make the internet a more honest place. Install AI Fact Checker today and browse with confidence!
+
+#AIFactChecker #FightFakeNews #ChromeExtension
