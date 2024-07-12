@@ -14,14 +14,12 @@ This project implements an AI-powered Fact Checking Chrome Extension using vario
 
 ![AI Fact Checker Demo](FactChecker.mp4)
 
-This GIF demonstrates the key features of our AI Fact Checker Chrome Extension:
+This video demonstrates the key features of our AI Fact Checker Chrome Extension:
 
 1. **Input**: A user clicks on the shield icon under a post to submit it for fact-checking.
 2. **Processing**: The system analyzes the input using various AI models and external APIs.
 3. **Fact-Check Results**: The extension returns a detailed fact-check report.
 4. **Tweet Generation**: Based on the fact-check results, a concise tweet is generated.
-
-[You can replace this text with a more detailed explanation of your specific workflow and key features as shown in your demo GIF or video.]
 
 ## Installation
 
