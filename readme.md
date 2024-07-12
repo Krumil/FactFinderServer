@@ -12,7 +12,7 @@ This project implements an AI-powered Fact Checking Chrome Extension using vario
 
 ## Demo
 
-![AI Fact Checker Demo](path/to/your/demo.gif)
+![AI Fact Checker Demo](FactChecker.mp4)
 
 This GIF demonstrates the key features of our AI Fact Checker Chrome Extension:
 
@@ -38,7 +38,6 @@ This GIF demonstrates the key features of our AI Fact Checker Chrome Extension:
 ## Configuration
 
 You can configure the Language Model to use in the extension settings:
-
 Options are "OpenAI GPT-4" or "Anthropic Claude".
 
 ## Contributing
