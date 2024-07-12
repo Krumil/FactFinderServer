@@ -1,4 +1,4 @@
-1/5 Ever felt overwhelmed by the flood of information online? 🌊 We've got your back! Just launched our AI Fact Checker API - your new best friend in the fight against misinformation. It's like having a team of fact-checkers right in your pocket!
+1/5 Hey folks! I'm thrilled to share my latest personal project with you all. Check out this quick video demo of my AI Fact Checker API. It's my answer to the overwhelming flood of online info - like having a team of fact-checkers right in your pocket!
 
 2/5 We've supercharged this bad boy with Google Fact Check and GDELT APIs. But wait, there's more! It doesn't just read text - it can describe images too. It's like teaching your grandma to use a smartphone, except this time, the AI is the one learning!
 
