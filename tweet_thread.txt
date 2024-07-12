@@ -1,9 +1,9 @@
-1/5 Hey folks! I'm thrilled to share my latest personal project with you all. Check out this quick video demo of my AI Fact Checker API. It's my answer to the overwhelming flood of online info - like having a team of fact-checkers right in your pocket!
+1/5 Hey folks! I'm pumped to share my latest personal project: a Chrome extension for instant fact-checking! Check out this quick video demo. It's like having a lie detector right in your browser - no more falling for fake news!
 
-2/5 We've supercharged this bad boy with Google Fact Check and GDELT APIs. But wait, there's more! It doesn't just read text - it can describe images too. It's like teaching your grandma to use a smartphone, except this time, the AI is the one learning!
+2/5 This bad boy is powered by an AI Fact Checker API I built, supercharged with Google Fact Check and GDELT APIs. And get this - it doesn't just read text, it can describe images too! It's like teaching your browser to think critically.
 
-3/5 Here's the kicker: it can whip up tweets faster than you can say "fake news". Imagine fact-checking AND tweeting about it in seconds. It's like having a social media manager and a fact-checker had a super-smart baby!
+3/5 Here's the cool part: it can whip up tweets about fact-checks faster than you can say "that's not true!" Imagine browsing, fact-checking, AND tweeting about it in seconds. It's like your browser suddenly became a truth-seeking superhero!
 
-4/5 We're all about choices here. Whether you're Team GPT-4 or Team Claude, we've got you covered. It's like choosing between chocolate and vanilla, except both flavors make you smarter!
+4/5 I've made it flexible too. Whether you're Team GPT-4 or Team Claude, this extension's got your back. It's like choosing between different superpowers - they're all awesome!
 
-5/5 Ready to join the truth-seeking squad? Swing by our GitHub repo and let's make the internet a more honest place together! [Your GitHub Repo Link] #AIFactChecker #TruthSeeker
+5/5 Want to join the fight against misinformation? Swing by my GitHub repo and let's make the internet a more honest place together! [Your GitHub Repo Link] #ChromeExtension #AIFactChecker
