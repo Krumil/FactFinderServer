@@ -1,0 +1,9 @@
+1/5 Excited to introduce our new AI Fact Checker API! We've developed a powerful tool to automate the fact-checking process, making it easier than ever to verify information.
+
+2/5 Our API leverages the Google Fact Check and GDELT APIs to provide comprehensive fact-checking capabilities. It doesn't stop there - we've also integrated image description features to analyze visual content.
+
+3/5 One of the coolest features? The API can automatically generate tweets based on fact-check results. This makes it simple to share verified information quickly and efficiently.
+
+4/5 We've built this with flexibility in mind. The API supports multiple language models, including OpenAI's GPT-4 and Anthropic's Claude, allowing you to choose the best fit for your needs.
+
+5/5 Interested in trying it out or contributing to the project? Check out our GitHub repository: [Your GitHub Repo Link] #AI #FactChecking
