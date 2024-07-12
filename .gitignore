@@ -1,7 +1,7 @@
 certificate.crt
 privatekey.key
-fact-checker-427413-eda99fe54cb1.json
 .env
 
 __pycache__/
 .vscode/
+.aider*
