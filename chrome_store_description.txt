@@ -1,20 +1,18 @@
-AI Fact Checker: Your Browser's Truth Detective
+AI Fact Checker: Advanced Information Verification Tool
 
-Tired of falling for fake news? Meet AI Fact Checker, your personal truth-seeking sidekick for the web!
+AI Fact Checker is a sophisticated Chrome extension designed to enhance online information accuracy and combat misinformation.
 
 Key Features:
-🔍 Instant Fact-Checking: Verify information on any webpage with just a click.
-🖼️ Image Analysis: Our AI can even describe and fact-check images!
-📊 Reliable Sources: Powered by Google Fact Check and GDELT APIs for accurate results.
-🐦 Tweet Generator: Automatically create shareable tweets about your fact-checks.
-🧠 Flexible AI: Choose between GPT-4 or Claude for your fact-checking needs.
+• Real-time Fact-Checking: Verify web content instantly with a single click.
+• Image Analysis: Utilize AI to describe and fact-check image content.
+• Reliable Data Sources: Leverage Google Fact Check and GDELT APIs for accurate, up-to-date information.
+• Social Media Integration: Generate concise, shareable summaries of fact-checks.
+• Customizable AI Models: Choose between GPT-4 or Claude for tailored fact-checking capabilities.
 
-How It Works:
-1. Browse the web as usual.
-2. When you spot something suspicious, click the AI Fact Checker icon.
-3. Our AI analyzes the content, cross-references with trusted sources, and delivers a fact-check report.
-4. Share your findings easily with the built-in tweet generator.
+Functionality:
+1. Navigate the web normally.
+2. Activate the AI Fact Checker when encountering questionable information.
+3. Our advanced AI analyzes the content, cross-references with authoritative sources, and provides a comprehensive fact-check report.
+4. Easily disseminate findings using the integrated summary generator.
 
-Join the fight against misinformation and make the internet a more honest place. Install AI Fact Checker today and browse with confidence!
-
-#AIFactChecker #FightFakeNews #ChromeExtension
+Empower yourself with AI Fact Checker to navigate the digital landscape with increased confidence and accuracy. Install now to contribute to a more informed online community.
